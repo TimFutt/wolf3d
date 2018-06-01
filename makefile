@@ -1,14 +1,12 @@
-NAME = wolf3d
+NAME = Wolf3d
 
 SRC = srcs/main.c \
 			srcs/menu.c \
 			srcs/menu_hook.c \
-			srcs/init.c
 
 OBJ = objs/main.o \
 	  objs/menu.o \
 	  objs/menu_hook.o \
-	  objs/init.o
 
 LIB = libft/libft.a
 
@@ -28,11 +26,11 @@ $(NAME) :
 		@echo "\033[36m[WOLF3D CREATED]\033[0m"
 
 clean :
+	@rm -rf *.o
 	@rm -rf $(OBJ)
 	@make clean -C ./libft/
 	@echo "\033[32m[CLEANING LIBFT OBJECTS]\033[0m"
 	@rm -rf objs
-	@rm -rf *.o
 	@echo "\033[32m[CLEANING WOLF3D OBJECTS]\033[0m"
 
 fclean : clean

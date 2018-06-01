@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/30 15:31:45 by tifuret           #+#    #+#             */
-/*   Updated: 2018/05/30 15:32:02 by tifuret          ###   ########.fr       */
+/*   Created: 2018/06/01 17:38:31 by tifuret           #+#    #+#             */
+/*   Updated: 2018/06/01 17:38:46 by tifuret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "libft.h"
 
 void	ft_lowercase(char **str)
 {
