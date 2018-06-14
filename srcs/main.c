@@ -1,20 +1,23 @@
-#include "../includes/fractol.h"
+#include "../includes/wolf3d.h"
 
-void	init(t_menu *men)
+void	init(t_mlx *e)
 {
 	void	*mlx;
 
-	men->mlx = mlx_init();
-	mlx = men->mlx;
-	men->win = NULL;
+	e->mlx = mlx_init();
+	mlx = e->mlx;
+	e->win = NULL;
+	e->choice = 1;
+	e->diff = 2;
+	e->res = 3;
 }
 
 int		main()
 {
-	t_menu	men;
+	t_mlx	e;
 
-	init(&men);
-	menu(&men);
-	mlx_loop(men.mlx);
+	init(&e);
+	menu(&e);
+	mlx_loop(e.mlx);
 	return (0);
 }

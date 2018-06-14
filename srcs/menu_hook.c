@@ -1,89 +1,83 @@
-#include "../includes/fractol.h"
+#include "../includes/wolf3d.h"
 
-int		mouse_release_hook_menu(int b, int x, int y, void *param)
+int		mouse_clic_menu(int b, int x, int y, t_mlx *e)
 {
 	int		i;
-	int		c;
-	void	*mlx;
-	t_menu	*men;
 
-	men = (t_menu*)param;
-	mlx = men->mlx;
-	mlx_destroy_image(men->mlx, men->data);
-	c = 4;
-	if (b == 1 && x >= 270 && x <= 753 && y >= 290 && y <= 340 && (c = 1))
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_mov.xpm", &i, &i);
-	else if (b == 1 && x >= 270 && x <= 753 && y >= 382 && y <= 433 && (c = 2))
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_jov.xpm", &i, &i);
-	else if (b == 1 && x >= 270 && x <= 753 && y >= 473 && y <= 524 && (c = 3))
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_bov.xpm", &i, &i);
-	else if (b == 1 && x >= 270 && x <= 493 && y >= 566 && y <= 616 && (c = 5))
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_sov.xpm", &i, &i);
-	else if (b == 1 && x >= 530 && x <= 753 && y >= 566 && y <= 616 && (c = 6))
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_qov.xpm", &i, &i);
-	else
-		men->data = mlx_xpm_file_to_image(men->mlx, "img/xpm/menu.xpm", &i, &i);
-	mlx_put_image_to_window(men->mlx, men->win, men->data, 0, 0);
-	menu(men);
-	return (1);
+	if (e->choice == 2)
+	{
+		mlx_destroy_image(e->mlx, e->data);
+		if ((b == 1) && x >= 128 && x <= 888 && y >= 290 && y <= 387)
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUCLIC1.xpm", &i, &i);
+		else if ((b == 1) && x >= 128 && x <= 473 && y >= 445 && y <= 500)
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUCLIC2.xpm", &i, &i);
+		else if ((b == 1) && x >= 128 && x <= 290 && y >= 560 && y <= 617)
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUCLIC3.xpm", &i, &i);
+		else
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/WOLF3DMENU.xpm", &i, &i);
+		mlx_put_image_to_window(e->mlx, e->win, e->data, 0, 0);
+		ft_put_str(e);
+	}
+	return (SUCCESS);
 }
 
-int		mouse_hook_menu(int b, int x, int y, void *param)
+int		mouse_release_menu(int b, int x, int y, t_mlx *e)
 {
 	int		i;
-	void	*mlx;
-	t_menu	*men;
 
-	men = (t_menu*)param;
-	mlx = men->mlx;
-	mlx_destroy_image(men->mlx, men->data);
-	if (b == 1 && x >= 270 && x <= 753 && y >= 290 && y <= 340)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_mon.xpm", &i, &i);
-	else if (b == 1 && x >= 270 && x <= 753 && y >= 382 && y <= 433)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_jon.xpm", &i, &i);
-	else if (b == 1 && x >= 270 && x <= 753 && y >= 473 && y <= 524)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_bon.xpm", &i, &i);
-	else if (b == 1 && x >= 270 && x <= 493 && y >= 566 && y <= 616)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_son.xpm", &i, &i);
-	else if (b == 1 && x >= 530 && x <= 753 && y >= 566 && y <= 616)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_qon.xpm", &i, &i);
-	else
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu.xpm", &i, &i);
-	mlx_put_image_to_window(men->mlx, men->win, men->data, 0, 0);
-	return (1);
+	if (e->choice == 2)
+	{
+		mlx_destroy_image(e->mlx, e->data);
+		if ((b == 1) && x >= 128 && x <= 888 && y >= 290 && y <= 387)
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUSURVOL1.xpm", &i, &i);
+		else if ((b == 1) && x >= 128 && x <= 473 && y >= 445 && y <= 500)
+		{
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUSURVOL2.xpm", &i, &i);
+			e->choice = 3;
+		}
+		else if ((b == 1) && x >= 128 && x <= 290 && y >= 560 && y <= 617)
+		{
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUSURVOL3.xpm", &i, &i);
+			exit(0);
+		}
+		else
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/WOLF3DMENU.xpm", &i, &i);
+		mlx_put_image_to_window(e->mlx, e->win, e->data, 0, 0);
+		ft_put_str(e);
+	}
+	menu(e);
+	return (SUCCESS);
 }
 
-int		mouse_motion_hook_menu(int x, int y, void *param)
+int		mouse_motion_menu(int x, int y, t_mlx *e)
 {
 	int		i;
-	void	*mlx;
-	t_menu	*men;
 
-	men = (t_menu*)param;
-	mlx = men->mlx;
-	mlx_destroy_image(men->mlx, men->data);
-	if (x >= 270 && x <= 753 && y >= 290 && y <= 340)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_mov.xpm", &i, &i);
-	else if (x >= 270 && x <= 753 && y >= 382 && y <= 433)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_jov.xpm", &i, &i);
-	else if (x >= 270 && x <= 753 && y >= 473 && y <= 524)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_bov.xpm", &i, &i);
-	else if (x >= 270 && x <= 493 && y >= 566 && y <= 616)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_sov.xpm", &i, &i);
-	else if (x >= 530 && x <= 753 && y >= 566 && y <= 616)
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu_qov.xpm", &i, &i);
-	else
-		men->data = mlx_xpm_file_to_image(mlx, "img/xpm/menu.xpm", &i, &i);
-	mlx_put_image_to_window(men->mlx, men->win, men->data, 0, 0);
-	return (1);
+	if (e->choice == 2)
+	{
+		mlx_destroy_image(e->mlx, e->data);
+		if (x >= 128 && x <= 888 && y >= 290 && y <= 387)
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUSURVOL1.xpm", &i, &i);
+		else if (x >= 128 && x <= 473 && y >= 445 && y <= 500)
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUSURVOL2.xpm", &i, &i);
+		else if (x >= 128 && x <= 290 && y >= 560 && y <= 617)
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUSURVOL3.xpm", &i, &i);												
+		else
+			e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/WOLF3DMENU.xpm", &i, &i);
+		mlx_put_image_to_window(e->mlx, e->win, e->data, 0, 0);
+		ft_put_str(e);
+	}
+	return (SUCCESS);
 }
 
-int		key_hook_menu(int key, void *param)
+int		key_hook_menu(int keycode, t_mlx *e)
 {
-	t_menu	*men;
-
-	men = ((t_menu*)param);
-	if (key == 53)
+	if (keycode == 53)
 		exit(0);
-	return (1);
+	if (keycode == 36 && e->choice == 1)
+	{
+		e->choice = 2;
+	}
+	menu(e);
+	return (SUCCESS);
 }

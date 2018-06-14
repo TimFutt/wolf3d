@@ -3,10 +3,20 @@ NAME = Wolf3d
 SRC = srcs/main.c \
 			srcs/menu.c \
 			srcs/menu_hook.c \
+			srcs/settings_hook.c \
+			srcs/diffculty_hook.c \
+			srcs/graphics_hook.c \
+			srcs/put_strings.c \
+			srcs/resolutions_hook.c \
 
 OBJ = objs/main.o \
 	  objs/menu.o \
 	  objs/menu_hook.o \
+	  objs/settings_hook.o \
+	  objs/diffculty_hook.o \
+	  objs/graphics_hook.o \
+	  objs/put_strings.o \
+	  objs/resolutions_hook.o
 
 LIB = libft/libft.a
 
