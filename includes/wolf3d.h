@@ -6,7 +6,7 @@
 /*   By: chaydont <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:19:39 by chaydont          #+#    #+#             */
-/*   Updated: 2018/06/14 16:35:38 by tifuret          ###   ########.fr       */
+/*   Updated: 2018/07/16 15:21:47 by chaydont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "../libft/libft.h"
 # include <mlx.h>
+# include <math.h>
 
-#define SUCCESS 1
+# define SUCCESS 1
+# define ERROR 0
 
 /*
  * ** Choice 1 = Ecran accueil
@@ -34,13 +36,17 @@
 
 typedef struct		s_mlx
 {
-	char	*img;
+	char	*str;
+	void	*img;
 	void	*data;
-	void	*mlx;
+	void	*ptr;
 	void	*win;
 	int		choice;
 	int		diff;
 	int		res;
+	int		bpp;
+	int		s_l;
+	int		endian;
 }					t_mlx;
 
 typedef struct		s_img
