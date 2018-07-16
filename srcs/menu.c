@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/11 13:10:39 by tifuret           #+#    #+#             */
+/*   Updated: 2018/07/11 13:10:40 by tifuret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/wolf3d.h"
 
 void	menu(t_mlx *e)
@@ -12,14 +24,24 @@ void	menu(t_mlx *e)
 	if (e->choice == 1)
 	{
 		e->win = mlx_new_window(e->mlx, 1024, 768, "WOLF3D");
-		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/WOLFSTART.xpm", &i, &i);
+		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/START.xpm", &i, &i);
 		mlx_put_image_to_window(e->mlx, e->win, e->data, 0, 0);
 		mlx_key_hook(e->win, key_hook_menu, e);
 	}
-	else if (e->choice == 2)
+	else if (e->choice == 2 || e->choice == 3)
+		menu2(e);
+	else if (e->choice == 4 || e->choice == 5)
+		menu3(e);
+}
+
+void	menu2(t_mlx *e)
+{
+	int		i;
+
+	if (e->choice == 2)
 	{
 		e->win = mlx_new_window(e->mlx, 1024, 768, "Menu");
-		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/WOLF3DMENU.xpm", &i, &i);
+		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENU.xpm", &i, &i);
 		mlx_put_image_to_window(e->mlx, e->win, e->data, 0, 0);
 		ft_put_str(e);
 		mlx_key_hook(e->win, key_hook_menu, e);
@@ -38,10 +60,16 @@ void	menu(t_mlx *e)
 		mlx_hook(e->win, 5, (1L << 2), mouse_release_settings, e);
 		mlx_hook(e->win, 6, (1L << 6), mouse_motion_settings, e);
 	}
-	else if (e->choice == 4)
+}
+
+void	menu3(t_mlx *e)
+{
+	int		i;
+
+	if (e->choice == 4)
 	{
 		e->win = mlx_new_window(e->mlx, 1024, 768, "Difficulty");
-		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/MENUDIFFICULTY.xpm", &i, &i);
+		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/DIFF.xpm", &i, &i);
 		mlx_put_image_to_window(e->mlx, e->win, e->data, 0, 0);
 		ft_put_str(e);
 		mlx_key_hook(e->win, key_hook_difficulty, e);
@@ -52,7 +80,7 @@ void	menu(t_mlx *e)
 	else if (e->choice == 5)
 	{
 		e->win = mlx_new_window(e->mlx, 1024, 768, "Resolution");
-		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/RESOLUTION.xpm", &i, &i);
+		e->data = mlx_xpm_file_to_image(e->mlx, "img/xpm/RESO.xpm", &i, &i);
 		mlx_put_image_to_window(e->mlx, e->win, e->data, 0, 0);
 		ft_put_str(e);
 		mlx_key_hook(e->win, key_hook_resolution, e);
@@ -61,4 +89,3 @@ void	menu(t_mlx *e)
 		mlx_hook(e->win, 6, (1L << 6), mouse_motion_resolution, e);
 	}
 }
-
