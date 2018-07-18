@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   diffculty_hook.c                                   :+:      :+:    :+:   */
+/*   difficulty_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/11 13:10:27 by tifuret           #+#    #+#             */
-/*   Updated: 2018/07/11 13:10:29 by tifuret          ###   ########.fr       */
+/*   Created: 2018/07/18 16:38:52 by tifuret           #+#    #+#             */
+/*   Updated: 2018/07/18 16:38:53 by tifuret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		mouse_clic_difficulty(int b, int x, int y, t_mlx *e)
 
 	if (e->choice == 4)
 	{
-		mlx_destroy_image(e->mlx, e->data);
+		mlx_destroy_image(e->ptr, e->data);
 		if ((b == 1) && x >= 424 && x <= 601 && y >= 290 && y <= 344)
 			e->data = mlx_xpm_file_to_image(e->ptr,
 				"img/xpm/EASYCLIC.xpm", &i, &i);

@@ -13,16 +13,13 @@
 #include "../includes/wolf3d.h"
 #include <math.h>
 
-#define WINDOW_HEIGHT 800
-#define WINDOW_WIDTH 1000
-#define PI (2 * acos(0))
-
-typedef struct	s_pov
+/*typedef struct	s_pov
 {
 	double	angle;
 	double	x;
 	double	y;
-}				t_pov;
+}				t_pov;*/
+
 
 void	put_pixel(char *img, int x, int y, int color)
 {
@@ -47,7 +44,7 @@ void	drawColumn(int height, int color, int x, t_mlx mlx)
 		put_pixel(mlx.str, x, y, 0);
 }
 
-void	ray(t_pov player, int grid[10][10], double angle, int x, t_mlx mlx)
+void	ray(/*t_mlx player,*/ int grid[10][10], double angle, int x, t_mlx mlx)
 {
 	int stepX;
 	int stepY;
@@ -62,31 +59,32 @@ void	ray(t_pov player, int grid[10][10], double angle, int x, t_mlx mlx)
 	int side;
 	int color;
 
+	//printf("%f\n", angle);
 	rayDirX = cos(angle);
 	rayDirY = sin(angle);
 	deltaDistX = fabs(1 / rayDirX);
 	deltaDistY = fabs(1 / rayDirY);
-	mapX = (int)player.x;
-	mapY = (int)player.y;
+	mapX = (int)mlx.x;
+	mapY = (int)mlx.y;
 	if (rayDirX < 0)
 	{
 		stepX = -1;
-		sideDistX = (player.x - mapX) * deltaDistX;
+		sideDistX = (mlx.x - mapX) * deltaDistX;
 	}
 	else
 	{
 		stepX = 1;
-		sideDistX = (mapX + 1.0 - player.x) * deltaDistX;
+		sideDistX = (mapX + 1.0 - mlx.x) * deltaDistX;
 	}
 	if (rayDirY < 0)
 	{
 		stepY = -1;
-		sideDistY = (player.y - mapY) * deltaDistY;
+		sideDistY = (mlx.y - mapY) * deltaDistY;
 	}
 	else
 	{
 		stepY = 1;
-		sideDistY = (mapY + 1.0 - player.y) * deltaDistY;
+		sideDistY = (mapY + 1.0 - mlx.y) * deltaDistY;
 	}
 	while (!grid[mapX][mapY] && mapX < 10 && mapX >= 0 && mapY < 10 && mapY >= 0)
 	{
@@ -107,54 +105,54 @@ void	ray(t_pov player, int grid[10][10], double angle, int x, t_mlx mlx)
 	}
 	double dist;
 	if (side)
-		dist = (mapX - player.x + (1 - stepX) / 2) / rayDirX;
+		dist = (mapX - mlx.x + (1 - stepX) / 2) / rayDirX;
 	else
-		dist = (mapY - player.y + (1 - stepY) / 2) / rayDirY;
+		dist = (mapY - mlx.y + (1 - stepY) / 2) / rayDirY;
 	drawColumn((int)(500 / dist), color, x, mlx);
 }
 
-void	raycasting(t_pov player, int grid[10][10], int fov, t_mlx mlx)
+void	raycasting(/*t_pov player,*/ int grid[10][10], int fov, t_mlx mlx)
 {
 	double	gap;
 	int		i;
 
+	printf("%f\n", mlx.angle);
 	i = -1;
 	gap = fov / (double)WINDOW_WIDTH;
 	while (++i < WINDOW_WIDTH - 10)
 	{
-		ray(player, grid, (gap * i) + player.angle - (fov / 2), i, mlx);
+		ray(/*player,*/ grid, (gap * i) + mlx.angle - (fov / 2), i, mlx);
 		//usleep(100);
 	}
 }
 
 int		main()
 {
-	t_pov	player;
+	//t_pov	player;
 	t_mlx	mlx;
 	int a;
 	int b;
 	int c;
-	int		grid[10][10] = {{0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-							{0, 0, 1, 0, 0, 0, 0, 0, 1, 1},
-							{0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-							{0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-							{0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-							{0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-							{0, 0, 0, 0, 0, 0, 0, 0, 1, 0}};
-	player.angle = 2.1;
-	player.x = 5.7;
-	player.y = 5.7;
+	int	grid[10][10] = {{0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 1, 0, 0, 0, 0, 0, 1, 1},
+						{0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 1, 0}};
+	mlx.angle = 2.1;
+	mlx.x = 5.7;
+	mlx.y = 5.7;
 	mlx.ptr = mlx_init();
 	mlx.win = mlx_new_window(mlx.ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Wolf3D");
 	mlx.img = mlx_new_image(mlx.ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	mlx.str = mlx_get_data_addr(mlx.img, &a, &b, &c);
-
-		raycasting(player, grid, PI * 0.8, mlx);
+		raycasting(/*player,*/  grid, PI * 0.8, mlx);
 		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
-
+		//ft_keys(&mlx);
 	mlx_destroy_image(mlx.ptr, mlx.img);
 	mlx_loop(mlx.ptr);
 	return (0);

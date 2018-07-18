@@ -15,30 +15,30 @@
 void	ft_put_diff(t_mlx *e)
 {
 	if (e->diff == 1)
-		mlx_string_put(e->mlx, e->win, 10, 5, 0xFFFFFF, "Difficulty : Easy");
+		mlx_string_put(e->ptr, e->win, 10, 5, 0xFFFFFF, "Difficulty : Easy");
 	if (e->diff == 2)
-		mlx_string_put(e->mlx, e->win, 10, 5, 0xFFFFFF, "Difficulty : Classic");
+		mlx_string_put(e->ptr, e->win, 10, 5, 0xFFFFFF, "Difficulty : Classic");
 	if (e->diff == 3)
-		mlx_string_put(e->mlx, e->win, 10, 5, 0xFFFFFF,
+		mlx_string_put(e->ptr, e->win, 10, 5, 0xFFFFFF,
 			"Difficulty : Hardcore");
 }
 
 void	ft_put_res(t_mlx *e)
 {
 	if (e->res == 1)
-		mlx_string_put(e->mlx, e->win, 10, 25, 0xFFFFFF,
+		mlx_string_put(e->ptr, e->win, 10, 25, 0xFFFFFF,
 			"Resolution : 320/180");
 	if (e->res == 2)
-		mlx_string_put(e->mlx, e->win, 10, 25, 0xFFFFFF,
+		mlx_string_put(e->ptr, e->win, 10, 25, 0xFFFFFF,
 			"Resolution : 640/360");
 	if (e->res == 3)
-		mlx_string_put(e->mlx, e->win, 10, 25, 0xFFFFFF,
+		mlx_string_put(e->ptr, e->win, 10, 25, 0xFFFFFF,
 			"Resolution : 1280/720");
 	if (e->res == 4)
-		mlx_string_put(e->mlx, e->win, 10, 25, 0xFFFFFF,
+		mlx_string_put(e->ptr, e->win, 10, 25, 0xFFFFFF,
 			"Resolution : 1920/1080");
 	if (e->res == 5)
-		mlx_string_put(e->mlx, e->win, 10, 25, 0xFFFFFF,
+		mlx_string_put(e->ptr, e->win, 10, 25, 0xFFFFFF,
 			"Resolution : 3840/2160");
 }
 

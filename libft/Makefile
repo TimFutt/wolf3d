@@ -65,7 +65,8 @@ SRC = ft_memset.c \
 	  ft_putendl_fd.c \
 	  ft_putnbr_fd.c \
 	  ft_wordcount.c \
-	  ft_lowercase.c
+	  ft_lowercase.c \
+	  get_next_line.c
 
 OBJ = ft_memset.o \
 	  ft_bzero.o \
@@ -120,7 +121,8 @@ OBJ = ft_memset.o \
 	  ft_putendl_fd.o \
 	  ft_putnbr_fd.o \
 	  ft_wordcount.o \
-	  ft_lowercase.o
+	  ft_lowercase.o \
+	  get_next_line.o
 
 HEADER = libft.h
 

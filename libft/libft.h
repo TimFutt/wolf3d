@@ -18,6 +18,9 @@
 # include <string.h>
 # include <stdio.h>
 
+# define BUFF_SIZE 32
+# define FD_MAX 10000
+
 typedef struct		s_list
 {
 	void			*content;
@@ -86,5 +89,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 int					ft_wordcount(const char *str, char delim);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+int					get_next_line(const int fd, char **line);
 
 #endif

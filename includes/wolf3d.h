@@ -16,9 +16,24 @@
 # include "../libft/libft.h"
 # include <mlx.h>
 # include <math.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <errno.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 # define SUCCESS 1
 # define ERROR 0
+
+# define WIN_X 640
+# define WIN_Y 480
+
+#define WINDOW_HEIGHT 1000
+#define WINDOW_WIDTH 1000
+#define PI (2 * acos(0))
 
 /*
  * ** Choice 1 = Ecran accueil
@@ -47,6 +62,13 @@ typedef struct		s_mlx
 	int		bpp;
 	int		s_l;
 	int		endian;
+	double	angle;
+	double	x;
+	double	y;
+	int		nbl;
+	char	*d;
+	char	**map;
+	int		len;
 }					t_mlx;
 
 typedef struct		s_img
@@ -59,6 +81,8 @@ typedef struct		s_img
 
 
 void				menu(t_mlx *e);
+void				menu2(t_mlx *e);
+void				menu3(t_mlx *e);
 int					key_hook_menu(int keycode, t_mlx *e);
 int					mouse_motion_menu(int x, int y, t_mlx *e);
 int					mouse_clic_menu(int b, int x, int y, t_mlx *e);
@@ -82,5 +106,6 @@ int					mouse_clic_resolution(int b, int x, int y, t_mlx *e);
 int					mouse_release_resolution(int b, int x, int y, t_mlx *e);
 
 void				ft_put_str(t_mlx *e);
+void				ft_keys(t_mlx *e);
 
 #endif
