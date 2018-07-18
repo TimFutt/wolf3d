@@ -11,33 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-/*
-int		init_player(t_mlx *mlx, int j, int i)
-{
-	while (mlx->map[j])
-	{
-		i = 0;
-		while (mlx->map[j][i])
-		{
-			if (mlx->map[j][i] == 'X')
-			{
-				//mlx->xpos = j;
-				//mlx->ypos = i;
-				//mlx->xdir = -1;
-				//mlx->ydir = 0;
-				//mlx->mvspd = 0.2;
-				//mlx->rtspd = 0.05;
-				//mlx->sprint = 0;
-				return (0);
-			}
-			i++;
-		}
-		j++;
-	}
-	ft_putendl("error : player not found in map");
-	return (-1);
-
-*/
 
 int			borders(char *buf, int i)
 {
