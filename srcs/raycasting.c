@@ -11,15 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-#include <math.h>
-
-/*typedef struct	s_pov
-{
-	double	angle;
-	double	x;
-	double	y;
-}				t_pov;*/
-
 
 void	put_pixel(char *img, int x, int y, int color)
 {
@@ -44,7 +35,7 @@ void	drawColumn(int height, int color, int x, t_mlx mlx)
 		put_pixel(mlx.str, x, y, 0);
 }
 
-void	ray(/*t_mlx player,*/ int grid[10][10], double angle, int x, t_mlx mlx)
+void	ray(/*int grid[10][10]*/ char **grid, double angle, int x, t_mlx mlx)
 {
 	int stepX;
 	int stepY;
@@ -111,7 +102,7 @@ void	ray(/*t_mlx player,*/ int grid[10][10], double angle, int x, t_mlx mlx)
 	drawColumn((int)(500 / dist), color, x, mlx);
 }
 
-void	raycasting(/*t_pov player,*/ int grid[10][10], int fov, t_mlx mlx)
+void	raycasting(/*int grid[10][10]*/ char **grid, int fov, t_mlx mlx)
 {
 	double	gap;
 	int		i;
@@ -121,7 +112,7 @@ void	raycasting(/*t_pov player,*/ int grid[10][10], int fov, t_mlx mlx)
 	gap = fov / (double)WINDOW_WIDTH;
 	while (++i < WINDOW_WIDTH - 10)
 	{
-		ray(/*player,*/ grid, (gap * i) + mlx.angle - (fov / 2), i, mlx);
+		ray(grid, (gap * i) + mlx.angle - (fov / 2), i, mlx);
 		//usleep(100);
 	}
 }
@@ -150,7 +141,7 @@ int		main()
 	mlx.win = mlx_new_window(mlx.ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Wolf3D");
 	mlx.img = mlx_new_image(mlx.ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	mlx.str = mlx_get_data_addr(mlx.img, &a, &b, &c);
-		raycasting(/*player,*/  grid, PI * 0.8, mlx);
+		raycasting(mlx->map, PI * 0.8, mlx);
 		mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
 		//ft_keys(&mlx);
 	mlx_destroy_image(mlx.ptr, mlx.img);
