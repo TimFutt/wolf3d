@@ -6,70 +6,81 @@
 /*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 13:10:33 by tifuret           #+#    #+#             */
-/*   Updated: 2018/07/11 13:10:35 by tifuret          ###   ########.fr       */
+/*   Updated: 2018/10/24 16:27:04 by tifuret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	init_menu(t_mlx *e)
+void			error_map(void)
 {
-	void	*mlx;
-
-	e->ptr = mlx_init();
-	mlx = e->ptr;
-	e->win = NULL;
-	e->choice = 1;
-	e->diff = 2;
-	e->res = 3;
+	ft_putendl("Error map");
+	exit(1);
 }
 
-t_mlx	*init_map(char *s)
+static void		init_menu(t_mlx *mlx)
 {
-	t_mlx	*mlx;
-	char	*buf;
-	char	*name;
-
-	name = ft_strjoin("wolf3d :", s);
-	if (!(mlx = (t_mlx *)malloc(sizeof(t_mlx))))
-		return (NULL);
-	buf = buffer(s, &(mlx->nbl));
-	if ((mlx->map = fillmap(buf, mlx->nbl, mlx)) == NULL)
-		return (NULL);
+	mlx->ptr = mlx_init();
 	mlx->win = NULL;
+	mlx->p.angle = 2.5 * PI;
+	mlx->p.i = -1;
+	mlx->p.fov = PI * 0.3;
 	mlx->choice = 1;
 	mlx->diff = 2;
 	mlx->res = 3;
-	mlx->nbl = 0;
-	mlx->ptr = mlx_init();
-	mlx->img = mlx_new_image(mlx->ptr, WIN_X, WIN_Y);
-	mlx->win = mlx_new_window(mlx->ptr, WIN_X, WIN_Y, name);
-	free(name);
-	mlx->d = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->s_l, &mlx->endian);
-	buf = buffer(s, &(mlx->nbl));
-	free(buf);
-	return (mlx);
 }
 
-int		main(int ac, char **av)
+static void		init_map(t_mlx *mlx)
 {
-	t_mlx	e;
+	mlx->ptr = mlx_init();
+	mlx->win = mlx_new_window(mlx->ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "Wolf 3D");
+	mlx->img = mlx_new_image(mlx->ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	mlx->str = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->s_l, &mlx->endian);
+	ft_keys(mlx);
+	mlx->p.angle = 2.5 * PI;
+	mlx->p.i = -1;
+	mlx->p.fov = PI * 0.3;
+	mlx->choice = 1;
+	mlx->diff = 2;
+	mlx->res = 3;
+	load_textures(mlx);
+}
 
-	if (ac == 2)
+void			menu_main(char *file, t_mlx *mlx)
+{
+	if (!(open_file(mlx, file)))
+	{
+		error_map();
+		return ;
+	}
+	init_menu(mlx);
+	menu(mlx);
+	mlx_loop(mlx->ptr);
+}
+
+int				main(int ac, char **av)
+{
+	t_mlx	*mlx;
+
+	if (!(mlx = (t_mlx *)malloc(sizeof(t_mlx))))
+		return (0);
+	if (ac == 3)
 	{
 		if (!ft_strcmp(av[1], "-menu"))
+			menu_main(av[2], mlx);
+	}
+	else if (ac == 2)
+	{
+		if (!(open_file(mlx, av[1])))
 		{
-			init_menu(&e);
-			menu(&e);
-			mlx_loop(e.ptr);
+			error_map();
+			return (0);
 		}
-		else
-			init_map(av[1]);
+		init_map(mlx);
+		raycasting(mlx->p, mlx->map, *mlx);
+		mlx_loop(mlx->ptr);
 	}
 	else
-	{
-		ft_putendl("Error : wrong entry.");
-		ft_putendl("usage: ./wolf3d [-menu, (path)]");
-	}
+		usage();
 	return (0);
 }

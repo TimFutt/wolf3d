@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lowercase.c                                     :+:      :+:    :+:   */
+/*   ft_linelen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tglandai <tglandai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/01 17:38:31 by tifuret           #+#    #+#             */
-/*   Updated: 2018/06/01 17:38:46 by tifuret          ###   ########.fr       */
+/*   Created: 2016/12/17 15:50:16 by tglandai          #+#    #+#             */
+/*   Updated: 2016/12/18 18:50:10 by tglandai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lowercase(char **str)
+size_t	ft_linelen(const char *s)
 {
-	int		i;
+	size_t	count;
 
-	i = -1;
-	while ((*str)[++i])
-		if ((*str)[i] >= 'A' && (*str)[i] <= 'Z')
-			(*str)[i] += 32;
+	count = 0;
+	while (s[count] && s[count] != '\n')
+		count++;
+	return (count);
 }

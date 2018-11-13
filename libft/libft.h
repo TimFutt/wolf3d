@@ -6,7 +6,7 @@
 /*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 16:01:40 by tifuret           #+#    #+#             */
-/*   Updated: 2017/11/22 15:58:55 by tifuret          ###   ########.fr       */
+/*   Updated: 2018/07/30 15:39:42 by tifuret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ int					ft_wordcount(const char *str, char delim);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					get_next_line(const int fd, char **line);
+int					ft_countlines(char *str);
+size_t				ft_linelen(const char *s);
 
 #endif

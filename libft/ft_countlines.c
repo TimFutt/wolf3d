@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lowercase.c                                     :+:      :+:    :+:   */
+/*   ft_countlines.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tglandai <tglandai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/01 17:38:31 by tifuret           #+#    #+#             */
-/*   Updated: 2018/06/01 17:38:46 by tifuret          ###   ########.fr       */
+/*   Created: 2016/12/04 13:06:22 by tglandai          #+#    #+#             */
+/*   Updated: 2018/07/30 15:39:00 by tifuret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lowercase(char **str)
+int		ft_countlines(char *str)
 {
-	int		i;
+	int		lines;
 
-	i = -1;
-	while ((*str)[++i])
-		if ((*str)[i] >= 'A' && (*str)[i] <= 'Z')
-			(*str)[i] += 32;
+	lines = 0;
+	if (!str)
+		return (-1);
+	while (*str)
+	{
+		if (*str == '\n')
+			lines++;
+		str++;
+	}
+	return (lines);
 }
