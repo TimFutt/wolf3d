@@ -12,12 +12,31 @@
 
 #include "../includes/wolf3d.h"
 
-static void		read_pos(int fd, t_mlx *e)
+void	ft_arrdel(char ***arr)
+{
+	char	**tmp;
+	int		i;
+
+	tmp = *arr;
+	i = 0;
+	if (!arr)
+		return ;
+	while (tmp[i])
+	{
+		free(tmp[i]);
+		i++;
+	}
+	free(tmp);
+	*arr = NULL;
+}
+
+int		read_pos(int fd, t_mlx *e)
 {
 	char	*line;
 	int		i;
 	char	**line_split;
 
+	line = NULL;
 	i = -1;
 	if (get_next_line(fd, &line) < 1)
 		error_map();
@@ -33,12 +52,15 @@ static void		read_pos(int fd, t_mlx *e)
 	e->p.y = ft_atoi(line_split[3]) + 0.5;
 	e->p.head = 0;
 	e->p.zoom = 1;
-	if (e->length < 0 || e->height < 0 || e->p.x < 0 || e->p.y < 0 ||
-			e->p.x >= e->length || e->p.y >= e->height)
+	if (e->length < 0 || e->height < 0 || e->p.x < 0 ||
+		e->p.y < 0 || e->p.x >= e->length ||
+		e->p.y >= e->height)
 		error_map();
+	ft_arrdel(&line_split);
+	return (1);
 }
 
-static void		read_line(char **line, int y, t_mlx *e)
+int		read_line(char **line, int y, t_mlx *e)
 {
 	int		x;
 	char	**line_split;
@@ -47,45 +69,51 @@ static void		read_line(char **line, int y, t_mlx *e)
 	if (y >= e->height)
 		error_map();
 	line_split = ft_strsplit(*line, ' ');
+	ft_strdel(line);
 	if (!(e->map[y] = (int *)malloc(sizeof(int) * e->length)))
-		return ;
+		return (0);
 	while (line_split[++x])
 	{
-		if (ft_atoi(line_split[x]) > 1 || ft_atoi(line_split[x]) < 0
-		|| x > e->length)
+		if (ft_atoi(line_split[x]) > 1 || ft_atoi(line_split[x]) < 0 ||
+		x > e->length)
 			error_map();
 		e->map[y][x] = ft_atoi(line_split[x]);
 	}
-	//free(line_split);
 	if (x != e->length)
 		error_map();
+	ft_arrdel(&line_split);
+	return (1);
 }
 
-static int		read_file(int fd, t_mlx *e)
+int		read_file(int fd, t_mlx *e)
 {
 	char	*line;
 	int		y;
 
 	y = -1;
-	read_pos(fd, e);
+	line = NULL;
+	if (!read_pos(fd, e))
+		return (0);
 	if (!(e->map = (int **)malloc(sizeof(int *) * e->height)))
 		return (0);
 	while (get_next_line(fd, &line) == 1)
-		read_line(&line, ++y, e);
+	{
+		if (!(read_line(&line, ++y, e)))
+			return (0);
+		ft_strdel(&line);
+	}
 	if (e->map[(int)e->p.y][(int)e->p.x] != 0)
 		error_map();
 	return (1);
 }
 
-int				open_file(t_mlx *e, char *f)
+int		open_file(t_mlx *e, char *file)
 {
 	int		fd;
 
-	fd = open(f, O_DIRECTORY);
-	if (fd >= 0)
+	if (open(file, O_DIRECTORY) >= 0)
 		return (0);
-	fd = open(f, O_RDONLY);
-	if (fd < 0)
+	if ((fd = open(file, O_RDONLY)) < 0)
 		return (0);
 	return (read_file(fd, e));
 }
