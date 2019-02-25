@@ -68,7 +68,8 @@ SRC = ft_memset.c \
 	  ft_lowercase.c \
 	  get_next_line.c \
 	  ft_countlines.c \
-	  ft_linelen.c
+	  ft_linelen.c \
+	  ft_arrdel.c
 
 OBJ = ft_memset.o \
 	  ft_bzero.o \
@@ -126,7 +127,8 @@ OBJ = ft_memset.o \
 	  ft_lowercase.o \
 	  get_next_line.o \
 	  ft_countlines.o \
-	  ft_linelen.o
+	  ft_linelen.o \
+	  ft_arrdel.o
 
 HEADER = libft.h
 

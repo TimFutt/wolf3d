@@ -66,7 +66,7 @@ int		ft_keys_moove2(int keycode, t_mlx *mlx)
 
 int		ft_mouse_pos(int x, int y, t_mlx *mlx)
 {
-	mlx->p.angle -= (double)((mlx->ox - x) / 80.);
+	mlx->p.angle -= (double)((mlx->ox - x) / 100.);
 	mlx->ox = x;
 	mlx->p.head = -(2 * y) + WINDOW_HEIGHT;
 	raycasting(mlx->p, mlx->map, *mlx);

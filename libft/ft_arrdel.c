@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   ft_arrdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tifuret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/22 13:59:33 by tifuret           #+#    #+#             */
-/*   Updated: 2017/11/22 13:59:36 by tifuret          ###   ########.fr       */
+/*   Created: 2019/02/12 12:17:36 by tifuret           #+#    #+#             */
+/*   Updated: 2019/02/12 12:17:37 by tifuret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+void	ft_arrdel(char ***arr)
 {
-	char			*sub;
-	unsigned int	i;
+	char	**tmp;
+	int		i;
 
+	tmp = *arr;
 	i = 0;
-	if (!s || !(sub = (char *)ft_memalloc(len + 1)))
-		return (NULL);
-	while (i < len)
+	if (!arr)
+		return ;
+	while (tmp[i])
 	{
-		sub[i] = s[start];
+		free(tmp[i]);
 		i++;
-		start++;
 	}
-	sub[i] = '\0';
-	return (sub);
+	free(tmp);
+	*arr = NULL;
 }
