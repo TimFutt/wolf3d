@@ -29,8 +29,8 @@ int		ft_keys_moove(int keycode, t_mlx *mlx)
 		newx -= 0.2 * cos(mlx->p.angle + PI / 2);
 		newy -= 0.2 * sin(mlx->p.angle + PI / 2);
 	}
-	if (newx < 0.1 || newx > mlx->length - 0.1 || newy < 0.1 ||
-			newy > mlx->height - 0.1 || mlx->map[(int)newy][(int)newx])
+	if (newx < 0.1 || newx > mlx->length - 0.1 || newy < 0.1
+			|| newy > mlx->height - 0.1 || mlx->map[(int)newy][(int)newx])
 		return (0);
 	mlx->p.x = newx;
 	mlx->p.y = newy;
@@ -55,8 +55,8 @@ int		ft_keys_moove2(int keycode, t_mlx *mlx)
 		newx -= 0.2 * cos(mlx->p.angle);
 		newy -= 0.2 * sin(mlx->p.angle);
 	}
-	if (newx < 0.1 || newx > mlx->length - 0.1 || newy < 0.1 ||
-			newy > mlx->height - 0.1 || mlx->map[(int)newy][(int)newx])
+	if (newx < 0.1 || newx > mlx->length - 0.1 || newy < 0.1
+			|| newy > mlx->height - 0.1 || mlx->map[(int)newy][(int)newx])
 		return (0);
 	mlx->p.x = newx;
 	mlx->p.y = newy;

@@ -24,8 +24,8 @@ t_pov	findpoint_x(t_pov p, int **grid, double angle, t_mlx mlx)
 	{
 		a.x += step;
 		a.y = (a.x - p.x) * tan(angle) + p.y;
-		if (a.x <= 0 || a.y < 0 || a.x >= mlx.length || a.y > mlx.height ||
-				grid[(int)a.y][(int)a.x - (1 - step) / 2])
+		if (a.x <= 0 || a.y < 0 || a.x >= mlx.length || a.y > mlx.height
+				|| grid[(int)a.y][(int)a.x - (1 - step) / 2])
 			return (a);
 	}
 	return (a);

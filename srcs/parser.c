@@ -77,6 +77,7 @@ static int		read_file(int fd, t_mlx *e)
 	while ((p = get_next_line(fd, &line)) == 1)
 		if (read_line(line, ++y, e) != e->length)
 			error_map();
+	free(line);
 	if (y != e->height - 1)
 		error_map();
 	if (e->map[(int)e->p.y][(int)e->p.x] != 0)
