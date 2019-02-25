@@ -17,7 +17,6 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <errno.h>
 # include <string.h>
 # include <sys/types.h>
